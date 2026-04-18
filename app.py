@@ -502,7 +502,7 @@ st.title("📄 Intelligent Contract Risk Analyzer")
 st.write("RAG + LLM + Agentic AI based legal contract analysis")
 
 # ---- INPUT SECTION ----
-st.subheader("📥 Input")
+st.subheader(" Input")
 
 option = st.radio("Choose input type:", ["Enter Text", "Upload PDF"])
 
@@ -516,20 +516,20 @@ elif option == "Upload PDF":
 
     if uploaded_file:
         contract_text = extract_text_from_pdf(uploaded_file)
-        st.success("✅ PDF processed successfully")
+        st.success(" PDF processed successfully")
 
 # ---- ANALYZE BUTTON ----
-if st.button("🚀 Analyze Contract"):
+if st.button(" Analyze Contract"):
 
     if not contract_text.strip():
         st.warning("Please provide contract text or upload a PDF.")
     else:
-        with st.spinner("🤖 Agent analyzing contract..."):
+        with st.spinner(" Agent analyzing contract..."):
             result = agent.invoke({"text": contract_text})
 
         report = result["report"]
 
-        st.subheader("📊 Risk Analysis Report")
+        st.subheader(" Risk Analysis Report")
         st.text(report)
 
         # ---- DOWNLOAD BUTTON ----
@@ -542,4 +542,4 @@ if st.button("🚀 Analyze Contract"):
 
 # ---- DISCLAIMER ----
 st.markdown("---")
-st.caption("⚠️ This analysis is AI-generated and does not constitute legal advice.")
+st.caption(" This analysis is AI-generated and does not constitute legal advice.")

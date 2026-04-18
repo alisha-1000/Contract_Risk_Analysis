@@ -35,4 +35,4 @@ with open("rag/metadata.pkl", "wb") as f:
         "types": types
     }, f)
 
-print("✅ Index built successfully!")
+print("Index built successfully!")

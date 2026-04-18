@@ -3,7 +3,7 @@ from rag.retriever import retrieve
 from rag.llm_rag import generate_response
 
 
-# 🧠 1️⃣ Extract clauses
+# Extract clauses
 def extract_clauses(state):
     text = state["text"]
 
@@ -17,7 +17,7 @@ def extract_clauses(state):
     }
 
 
-# 🔍 2️⃣ Analyze clause (RAG + LLM)
+# Analyze clause (RAG + LLM)
 def analyze_clause(state):
     idx = state["current_index"]
     clause = state["clauses"][idx]
@@ -33,13 +33,13 @@ def analyze_clause(state):
     return state
 
 
-# 🔁 3️⃣ Move to next clause
+# Move to next clause
 def next_clause(state):
     state["current_index"] += 1
     return state
 
 
-# ❓ 4️⃣ Check condition
+# Check condition
 def has_more_clauses(state):
     return state["current_index"] < len(state["clauses"])
 
