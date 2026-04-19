@@ -18,9 +18,7 @@ body { background-color: #0E1117; color: white; }
     margin-bottom: 12px;
 }
 
-<<<<<<< HEAD
-# INPUT SECTION
-st.subheader(" Input")
+
 =======
 .badge {
     padding: 4px 10px;
@@ -48,20 +46,8 @@ with st.sidebar:
 
         st.success("PDF Loaded")
 
-<<<<<<< HEAD
-    if uploaded_file:
-        contract_text = extract_text_from_pdf(uploaded_file)
-        st.success(" PDF processed successfully")
 
-# ANALYZE BUTTON 
-if st.button(" Analyze Contract"):
 
-    if not contract_text.strip():
-        st.warning("Please provide contract text or upload a PDF.")
-    else:
-        with st.spinner(" Agent analyzing contract..."):
-            result = agent.invoke({"text": contract_text})
-=======
         if st.button("🚀 Run Analysis", use_container_width=True):
             agent = build_agent()
             result = agent.invoke({"text": text})
@@ -72,16 +58,10 @@ if "data" in st.session_state:
 
     res = st.session_state["data"]
     clauses = res["results"]
->>>>>>> 970add7760af7a819298df005baabc35c00195f9
 
     col1, col2 = st.columns([1.2, 2])
 
-<<<<<<< HEAD
-        st.subheader(" Risk Analysis Report")
-        st.text(report)
 
-        # DOWNLOAD BUTTON
-=======
     # LEFT: DOCUMENT
     with col1:
         st.subheader("📄 Document")
@@ -119,18 +99,14 @@ if "data" in st.session_state:
             </div>
             """, unsafe_allow_html=True)
 
->>>>>>> 970add7760af7a819298df005baabc35c00195f9
         st.download_button(
             "📄 Download Report",
             res["report"],
             file_name="report.txt"
         )
 
-<<<<<<< HEAD
-#DISCLAIMER
-st.markdown("---")
-st.caption(" This analysis is AI-generated and does not constitute legal advice.")
-=======
+
+
 else:
     st.info("Upload a contract and click Run Analysis")
->>>>>>> 970add7760af7a819298df005baabc35c00195f9
+
