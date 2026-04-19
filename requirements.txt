@@ -5,6 +5,9 @@ sentence-transformers
 faiss-cpu
 groq
 python-dotenv
+langgraph
+langchain
+langchain-core
 pypdf
 scikit-learn
 joblib
