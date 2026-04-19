@@ -501,7 +501,7 @@ st.set_page_config(page_title="Contract Risk Analyzer", layout="wide")
 st.title("📄 Intelligent Contract Risk Analyzer")
 st.write("RAG + LLM + Agentic AI based legal contract analysis")
 
-# ---- INPUT SECTION ----
+# INPUT SECTION
 st.subheader(" Input")
 
 option = st.radio("Choose input type:", ["Enter Text", "Upload PDF"])
@@ -518,7 +518,7 @@ elif option == "Upload PDF":
         contract_text = extract_text_from_pdf(uploaded_file)
         st.success(" PDF processed successfully")
 
-# ---- ANALYZE BUTTON ----
+# ANALYZE BUTTON 
 if st.button(" Analyze Contract"):
 
     if not contract_text.strip():
@@ -532,7 +532,7 @@ if st.button(" Analyze Contract"):
         st.subheader(" Risk Analysis Report")
         st.text(report)
 
-        # ---- DOWNLOAD BUTTON ----
+        # DOWNLOAD BUTTON
         st.download_button(
             label="📄 Download Report",
             data=report,
@@ -540,6 +540,6 @@ if st.button(" Analyze Contract"):
             mime="text/plain"
         )
 
-# ---- DISCLAIMER ----
+#DISCLAIMER
 st.markdown("---")
 st.caption(" This analysis is AI-generated and does not constitute legal advice.")
