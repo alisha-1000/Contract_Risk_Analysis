@@ -1,175 +1,293 @@
-# Intelligent Contract Risk Classification  
-Milestone 1 – Classical NLP & Machine Learning System
+# ⚖️ Intelligent Contract Risk Analysis & Agentic Legal Assistance
+
+## 🚀 From NLP-Based Risk Detection to Agentic AI Legal Reasoning
 
 ---
 
-## 1. Project Overview
+## 📌 Project Overview
 
-This project implements a machine learning-based contract clause risk classification system designed to automatically identify potentially risky clauses in legal documents.
+This project presents an **AI-powered system for analyzing legal contracts** and identifying potential risks at the clause level.
 
-The system applies classical Natural Language Processing (NLP) techniques and supervised learning models to perform clause-level risk prediction without relying on Large Language Models (LLMs).
+The system is developed in two phases:
 
-This work corresponds to Milestone 1 of Project 7 – AI-Driven Legal Document Analysis.
+* **Milestone 1:** Classical NLP + Machine Learning-based clause classification
+* **Milestone 2:** Retrieval-Augmented Generation (RAG) + Agentic AI system for autonomous reasoning
 
----
-
-## 2. Objective
-
-The objective of this project is to design and implement a clause-level risk classification system that:
-
-- Accepts contract text or PDF input  
-- Performs structured preprocessing  
-- Extracts meaningful textual features  
-- Classifies clauses into predefined risk categories  
-- Produces structured and interpretable risk predictions  
+The final system integrates **ML, RAG, LLMs, and Agentic workflows** to generate structured contract risk reports.
 
 ---
 
-## 3. Technology Stack
+## 🧠 Key Features
 
-- Python  
-- Scikit-learn  
-- NLTK  
-- Pandas  
-- NumPy  
-- Matplotlib / Seaborn  
-- Joblib (Model Serialization)  
-
----
-
-## 4. Dataset Description
-
-The dataset consists of labeled legal contract clauses categorized into the following risk levels:
-
-- High Risk  
-- Medium Risk  
-- Low Risk  
-
-The problem is formulated as a multi-class text classification task at the clause level.
+* 📄 Upload contract (PDF/Text)
+* 🔍 Clause-level analysis
+* ⚠️ Risk classification (High / Medium / Low)
+* 📚 Context retrieval using RAG (FAISS)
+* 🧠 LLM-based reasoning (Groq API)
+* 🔁 Agentic workflow using LangGraph
+* 📊 Structured risk report generation
+* 🌐 Live deployment (Streamlit Cloud)
 
 ---
 
-## 5. Data Preprocessing Pipeline
+## 🚀 How It Works
 
-The preprocessing workflow was designed to preserve legal semantics while reducing textual noise.
-
-### Steps Implemented
-
-1. Lowercasing normalization  
-2. Removal of punctuation  
-3. Tokenization using NLTK  
-4. Stopword removal  
-5. Preservation of legally significant keywords such as:
-   - shall  
-   - must  
-   - may  
-   - not  
-6. Lemmatization using WordNet  
-7. Text reconstruction prior to vectorization  
-
-Preserving legal obligation terms ensured improved semantic representation of contractual clauses.
+1. Upload contract (PDF/Text)
+2. System splits text into clauses
+3. RAG retrieves similar legal clauses
+4. LLM analyzes clause risk
+5. Agent compiles structured report
 
 ---
 
-## 6. Feature Engineering
+## 🧩 System Architecture
 
-TF-IDF (Term Frequency–Inverse Document Frequency) vectorization was applied with the following configuration:
-
-- Maximum Features: 5000  
-- N-gram Range: (1,2)  
-- Minimum Document Frequency: 2  
-
-The inclusion of bigrams allowed the model to capture contextual legal expressions such as:
-
-- breach contract  
-- terminate agreement  
-- indemnify party  
-
-The resulting feature matrix was high-dimensional and sparse, making it well-suited for linear classification models.
-
----
-
-## 7. Models Implemented
-
-### Logistic Regression
-- max_iter = 1000  
-
-### Decision Tree Classifier
-- max_depth = 20  
-- random_state = 42  
+```
+Input (PDF/Text)
+        ↓
+Clause Segmentation (utils/parser.py)
+        ↓
+RAG Retrieval (rag/retriever.py)
+        ↓
+LLM Reasoning (rag/llm_rag.py)
+        ↓
+Agent Workflow (agent/graph.py)
+        ↓
+Final Risk Report
+```
 
 ---
 
-## 8. Training Strategy
+## 📊 Milestone 1: ML-Based Risk Classification
 
-- 80–20 Train-Test Split  
-- Stratified Sampling to preserve class distribution  
-- Random State fixed at 42 for reproducibility  
+### 🔹 Objective
 
----
+Detect risky clauses using classical NLP techniques.
 
-## 9. Evaluation Metrics
+### 🔹 Implementation
 
-The system was evaluated using:
+* Text preprocessing (cleaning, tokenization)
+* Feature extraction using **TF-IDF**
+* Model: **Logistic Regression**
+* Files:
 
-- Accuracy  
-- Precision  
-- Recall  
-- F1-Score  
-- Confusion Matrix  
+  * `risk_model.pkl`
+  * `label_encoder.pkl`
+  * `tfidf_vectorizer.pkl`
 
----
+### 🔹 Output
 
-## 10. Results
-
-| Model               | Accuracy | F1 Score |
-|---------------------|----------|----------|
-| Logistic Regression | 0.86     | 0.86     |
-| Decision Tree       | 0.80     | 0.80     |
-
-Logistic Regression demonstrated superior generalization performance due to its robustness in high-dimensional sparse TF-IDF feature spaces. The Decision Tree model exhibited slight overfitting tendencies.
+* Clause-level risk prediction
+* Evaluation using accuracy and F1-score
 
 ---
 
-## 11. Model Serialization
+## 🚀 Milestone 2: Agentic AI Legal Assistant
 
-The following components were serialized using Joblib:
+### 🔹 1. Clause Segmentation
 
-- Trained Logistic Regression model  
-- TF-IDF vectorizer  
-- Label encoder  
-
-These artifacts enable seamless integration into a deployment-ready user interface for real-time clause-level risk prediction.
+* Implemented in `utils/parser.py`
+* Regex-based splitting
+* Structured clause extraction
 
 ---
 
-## 12. User Interface Integration
+### 🔹 2. RAG Pipeline
 
-The system is structured for integration with a user interface capable of:
+* Embeddings: `sentence-transformers`
+* Vector Store: `FAISS`
+* Files:
 
-- Accepting contract text or PDF input  
-- Performing automated preprocessing  
-- Generating clause-level risk predictions  
-- Highlighting high-risk clauses  
+  * `faiss.index`
+  * `metadata.pkl`
+  * `build_index.py`
+
+```
+Query → Embedding → Similar Clauses → Context
+```
 
 ---
 
-## 13. Project Structure
-├── CONTRACT_RISK_CLASSIFICATION.ipynb
-├── model.pkl
-├── vectorizer.pkl
-├── label_encoder.pkl
+### 🔹 3. LLM Reasoning
+
+* Implemented in `rag/llm_rag.py`
+* Uses **Groq API**
+* Generates:
+
+  * Risk level
+  * Explanation
+
+---
+
+### 🔹 4. Agentic Workflow (LangGraph)
+
+Implemented in `agent/graph.py`
+
+```
+Extract → Analyze → Loop → Report
+```
+
+* Stateful execution
+* Iterative clause analysis
+* Final structured output
+
+---
+
+### 🔹 5. Output
+
+* Clause-level:
+
+  * Risk Level
+  * Explanation
+* Final contract risk report
+
+---
+
+## 🖥️ User Interface
+
+Built using **Streamlit** (`app.py`)
+
+Features:
+
+* Upload PDF
+* View clauses
+* Risk dashboard
+* Download report
+
+---
+
+## 🌐 Deployment
+
+Deployed using **Streamlit Cloud**
+
+🔗 **Live App:** [https://your-app-link.streamlit.app](https://contractriskanalysis-l3qvfbvsojfij8hek3khzk.streamlit.app/)
+
+---
+
+## ⚙️ Tech Stack
+
+### 🔹 NLP & ML
+
+* scikit-learn
+* nltk
+* TF-IDF
+
+### 🔹 RAG
+
+* sentence-transformers
+* FAISS
+
+### 🔹 Agentic AI
+
+* LangGraph
+* LangChain
+
+### 🔹 LLM
+
+* Groq API
+
+### 🔹 Frontend
+
+* Streamlit
+
+### 🔹 Other
+
+* PyPDF
+* pandas, numpy
+
+---
+
+## 📁 Project Structure
+
+```
+Contract_Risk_Analysis/
+│
+├── app.py
+├── requirements.txt
 ├── README.md
+│
+├── agent/
+│   └── graph.py
+│
+├── rag/
+│   ├── retriever.py
+│   ├── llm_rag.py
+│   ├── build_index.py
+│   ├── faiss.index
+│   └── metadata.pkl
+│
+├── utils/
+│   └── parser.py
+│
+├── risk_model.pkl
+├── label_encoder.pkl
+├── tfidf_vectorizer.pkl
+```
+
+---
+
+## 🔐 Environment Setup
+
+Create `.streamlit/secrets.toml`:
+
+```
+GROQ_API_KEY = "your_api_key_here"
+```
+
+---
+
+## ▶️ Run Locally
+
+```
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+---
+
+## 📊 Evaluation Alignment
+
+This project satisfies evaluation criteria:
+
+* ✔ RAG implementation
+* ✔ Agentic AI (LangGraph)
+* ✔ LLM-based reasoning
+* ✔ Clean modular structure
+* ✔ Deployment with UI
+* ✔ Explainable outputs
+
+---
+
+## ⚠️ Disclaimer
+
+This system provides AI-generated insights and **does not constitute legal advice**.
+
+---
+
+## 👥 Team Members
+
+* Your Name
+Ganaga Raghuwanshi
+Anuradha Raghuwanshi
+Bulbul Agarwalla
+Alisha Gupta
 
 
-## 14. Disclaimer
+---
 
-This system is developed for academic and research purposes only and does not constitute legal advice.
+## 🎯 Future Work
 
-## 15. Deployed URL
-https://contractriskanalysis-l3qvfbvsojfij8hek3khzk.streamlit.app/
+* Clause type classification
+* Highlight risky clauses in document
+* Multi-contract comparison
+* Fine-tuned legal LLM
 
-## Application Preview
+---
 
-![Dashboard Screenshot](images/confusion_matrix.png)
+## 🧠 Key Insight
+
+> This project demonstrates the transition from traditional NLP systems to **agentic AI workflows with retrieval-augmented reasoning**, enabling more reliable and explainable legal analysis.
+
+---
+
 
