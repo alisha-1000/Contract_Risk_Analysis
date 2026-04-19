@@ -5,7 +5,7 @@ sentence-transformers
 faiss-cpu
 groq
 python-dotenv
-PyPDF2
+pypdf
 scikit-learn
 joblib
 nltk
